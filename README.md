@@ -28,28 +28,28 @@ This project aims to:
 ### 1. Create database
 Create a PostgreSQL database, for example:
 
-```sql
+``sql
 CREATE DATABASE compressor_station_analysis;
 
 ### 2. Run schema and load data
 
 Execute the files in this order:
 
-```sql/schema.sql
-```sql/data.sql
+``sql/schema.sql
+``sql/data.sql
 ### 3. Run analytical SQL stages
 
 Then execute:
 
-```sql/stage_1_checks.sql
-```sql/stage_2_station_analysis.sql
-```sql/stage_3_mode_analysis.sql
-```sql/stage_4_station_mode_analysis.sql
-```sql/stage_5_stability_metrics.sql
-```sql/stage_6_risk_scoring.sql
-```sql/stage_7_events_analysis.sql
-```sql/stage_8_risk_events_summary.sql
-```sql/final_sql_mart.sql
+``sql/stage_1_checks.sql
+``sql/stage_2_station_analysis.sql
+``sql/stage_3_mode_analysis.sql
+``sql/stage_4_station_mode_analysis.sql
+``sql/stage_5_stability_metrics.sql
+``sql/stage_6_risk_scoring.sql
+``sql/stage_7_events_analysis.sql
+``sql/stage_8_risk_events_summary.sql
+``sql/final_sql_mart.sql
 ### 4. Export final result
 
 Export the result of final_sql_mart.sql to CSV.
