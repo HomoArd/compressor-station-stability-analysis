@@ -206,6 +206,16 @@ The Python part of the project includes:
 
 ---
 
+## Requirements
+
+- PostgreSQL
+- Python 3.11+
+- pandas
+- matplotlib
+- jupyter
+
+---
+
 ## Repository Structure
 
 ```text
