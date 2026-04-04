@@ -139,5 +139,5 @@ sql/
   stage_5_stability_metrics.sql
   stage_6_risk_scoring.sql
   stage_7_events_analysis.sql
-  stage_8_window_functions.sql
+  stage_8_risk_events_summary
   final_sql_mart.sql
