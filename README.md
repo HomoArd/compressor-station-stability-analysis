@@ -169,30 +169,19 @@ This confirms that the pandas reproduction matches the SQL monitoring mart.
 
 ## Visual Analysis
 
-The project includes matplotlib-based visual checks for selected station-mode slices.
-
 ### Problematic slice: station 110, repair mode
-
-The first visual check compares pressure behavior with rolling and baseline values for a problematic station-mode slice.
 
 ![Pressure trend for station 110 repair mode](reports/pressure_station_110_repair.png)
 
-The next chart highlights anomaly points for station 110.
-
-![Anomaly points for station 110](reports/anomaly%20pressure%20station%20110.png)
-
-The event-aware chart adds operational event markers to the monitoring view.
+![Anomaly points for station 110](reports/anomaly_pressure_station_110.png)
 
 ![Event markers for station 110](reports/event_markers_station_110.png)
 
 ### Stable slice: station 102, normal mode
 
-The stable slice is used as a comparison case where pressure and flow remain close to expected behavior.
+![Stable pressure for station 102 normal mode](reports/stable_pressure_station_102_normal.png)
 
-![Stable pressure for station 102 normal mode](reports/stable%20pressure%20102%20normal.png)
-
-![Stable flow for station 102 normal mode](reports/stable%20flow%20102%20station,%20normal.png)
-
+![Stable flow for station 102 normal mode](reports/stable_flow_station_102_normal.png)
 ## Key Findings
 
 ### 1. Most station-mode months were stable
