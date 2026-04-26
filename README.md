@@ -452,3 +452,18 @@ Completed layers:
 - exploratory ML extension.
 
 The strongest part of the project is the end-to-end analytical pipeline: raw operational data → SQL monitoring mart → event-aware analysis → pandas reproduction → validation → visualization.
+## Visual Analysis
+
+### Problematic slice: station 110, repair mode
+
+![Pressure trend for station 110 repair mode](reports/pressure_station_110_repair.png)
+
+![Anomaly points for station 110](reports/anomaly_pressure_station_110.png)
+
+![Event markers for station 110](reports/event_markers_station_110.png)
+
+### Stable slice: station 102, normal mode
+
+![Stable pressure for station 102 normal mode](reports/stable_pressure_station_102_normal.png)
+
+![Stable flow for station 102 normal mode](reports/stable_flow_station_102_normal.png)
