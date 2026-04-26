@@ -11,14 +11,14 @@ The project is designed as a portfolio-style analytics case that demonstrates:
 - event-aware monitoring logic;
 - pandas reproduction of SQL logic;
 - SQL vs pandas validation;
-- basic matplotlib visual analysis;
+- matplotlib-based visual analysis;
 - an exploratory machine learning extension for next-month event prediction.
 
 The dataset is synthetic, but it follows a realistic operational structure: compressor stations, daily measurements, operating modes, and event logs.
 
 ## Business Problem
 
-Compressor stations generate regular operational measurements such as pressure, flow, temperature, and vibration. A monitoring process should identify periods where the station behavior deviates from recent historical patterns and determine whether these deviations are connected with operational events.
+Compressor stations generate regular operational measurements such as pressure, flow, temperature, and vibration. A monitoring process should identify periods where station behavior deviates from recent historical patterns and determine whether these deviations are connected with operational events.
 
 The analytical questions behind the project are:
 
@@ -92,8 +92,8 @@ The SQL mart includes:
 - 3-period rolling averages;
 - 3-period previous-only baselines;
 - absolute and percentage changes;
-- deviation from rolling values;
-- deviation from previous-only baselines;
+- deviations from rolling values;
+- deviations from previous-only baselines;
 - binary monitoring flags;
 - total `signal_count`;
 - final `monitoring_status`.
@@ -118,7 +118,7 @@ Main SQL files:
 | `sql/05_monitoring_with_events.sql` | Adds event-aware monitoring features |
 | `sql/06_analysis_queries.sql` | Contains analytical queries over the final mart |
 | `sql/07_threshold_diagnostics.sql` | Checks threshold behavior and signal distribution |
-| `sql/08_ml_ready.sql` | Builds station-month data for ML extension |
+| `sql/08_ml_ready.sql` | Builds station-month data for the ML extension |
 
 ## Event-Aware Monitoring Layer
 
@@ -171,18 +171,27 @@ This confirms that the pandas reproduction matches the SQL monitoring mart.
 
 The project includes matplotlib-based visual checks for selected station-mode slices.
 
-Current visual examples include:
+### Problematic slice: station 110, repair mode
 
-- pressure trend vs rolling average and previous-only baseline;
-- signal points highlighted on top of pressure trends;
-- event and critical-event markers added to operational trends;
-- comparison of problematic and stable station-mode slices;
-- flow monitoring for stable slices.
+The first visual check compares pressure behavior with rolling and baseline values for a problematic station-mode slice.
 
-Example slices used in the analysis:
+![Pressure trend for station 110 repair mode](reports/pressure_station_110_repair.png)
 
-- `station_id = 110`, `mode = repair` as a problematic slice;
-- `station_id = 102`, `mode = normal` as a stable slice.
+The next chart highlights anomaly points for station 110.
+
+![Anomaly points for station 110](reports/anomaly%20pressure%20station%20110.png)
+
+The event-aware chart adds operational event markers to the monitoring view.
+
+![Event markers for station 110](reports/event_markers_station_110.png)
+
+### Stable slice: station 102, normal mode
+
+The stable slice is used as a comparison case where pressure and flow remain close to expected behavior.
+
+![Stable pressure for station 102 normal mode](reports/stable%20pressure%20102%20normal.png)
+
+![Stable flow for station 102 normal mode](reports/stable%20flow%20102%20station,%20normal.png)
 
 ## Key Findings
 
@@ -283,8 +292,9 @@ The main interpretation is that ML can be added as a second layer after a transp
 ## Project Structure
 
 ```text
-compressor-station-monitoring/
+compressor-station-stability-analysis/
 │
+├── README.md
 ├── DATASET_NOTES.md
 ├── DATA_DICTIONARY.md
 ├── dataset_summary.json
@@ -295,58 +305,32 @@ compressor-station-monitoring/
 │   │   ├── measurements.csv
 │   │   └── events.csv
 │   │
-│   ├── processed/
-│   │   ├── monitoring_sql.csv
-│   │   └── ml_ready.csv
-│   │
-│   └── src/
-│       ├── monitoring_validation_and_plots.py
-│       └── ml for.py
-│
-└── sql/
-    ├── 01_schema.sql
-    ├── 02_load_data.sql
-    ├── 02_load_notes.sql
-    ├── 03_monthly_metrics.sql
-    ├── 04_monitoring_core.sql
-    ├── 05_monitoring_with_events.sql
-    ├── 06_analysis_queries.sql
-    ├── 07_threshold_diagnostics.sql
-    └── 08_ml_ready.sql
-```
-
-Recommended cleanup before final GitHub publication:
-
-```text
-compressor-station-monitoring/
-│
-├── data/
-│   ├── raw/
 │   └── processed/
-│
-├── sql/
-│
-├── src/
-│   ├── monitoring_validation_and_plots.py
-│   └── ml_baseline.py
+│       ├── monitoring_sql.csv
+│       └── ml_ready.csv
 │
 ├── reports/
-│   └── figures/
+│   ├── anomaly pressure station 110.png
+│   ├── event_markers_station_110.png
+│   ├── pressure_station_110_repair.png
+│   ├── stable flow 102 station, normal.png
+│   └── stable pressure 102 normal.png
 │
-├── DATASET_NOTES.md
-├── DATA_DICTIONARY.md
-├── dataset_summary.json
-└── README.md
+├── sql/
+│   ├── 01_schema.sql
+│   ├── 02_load_data.sql
+│   ├── 02_load_notes.sql
+│   ├── 03_monthly_metrics.sql
+│   ├── 04_monitoring_core.sql
+│   ├── 05_monitoring_with_events.sql
+│   ├── 06_analysis_queries.sql
+│   ├── 07_threshold_diagnostics.sql
+│   └── 08_ml_ready.sql
+│
+└── src/
+    ├── monitoring_validation_and_plots.py
+    └── ml_baseline.py
 ```
-
-Suggested changes:
-
-- move Python scripts from `data/src/` to `src/`;
-- rename `ml for.py` to `ml_baseline.py`;
-- save matplotlib charts into `reports/figures/`;
-- replace absolute local file paths with relative project paths;
-- remove trailing null bytes from some SQL files before publishing;
-- optionally add a `requirements.txt` file.
 
 ## Technologies Used
 
@@ -401,21 +385,15 @@ data/processed/monitoring_sql.csv
 
 ### 4. Run pandas validation and plots
 
-Update file paths if needed and run:
+Run:
 
 ```bash
-python data/src/monitoring_validation_and_plots.py
+python src/monitoring_validation_and_plots.py
 ```
 
 ### 5. Run ML extension
 
 Run:
-
-```bash
-python data/src/ml\ for.py
-```
-
-If the script is renamed during cleanup:
 
 ```bash
 python src/ml_baseline.py
@@ -427,9 +405,9 @@ Potential next steps:
 
 - convert the monitoring mart into a reusable SQL view or materialized view;
 - parameterize monitoring thresholds;
-- save plots automatically to `reports/figures/`;
+- save plots automatically to `reports/`;
 - add a dashboard layer in Power BI, Tableau, or Streamlit;
-- improve ML preprocessing with scaling and cross-validation by time;
+- improve ML preprocessing with scaling and time-based validation;
 - compare Logistic Regression with tree-based models;
 - add station-level risk scoring;
 - add automated data quality checks;
@@ -451,19 +429,14 @@ Completed layers:
 - matplotlib visual checks;
 - exploratory ML extension.
 
-The strongest part of the project is the end-to-end analytical pipeline: raw operational data → SQL monitoring mart → event-aware analysis → pandas reproduction → validation → visualization.
-## Visual Analysis
+The strongest part of the project is the end-to-end analytical pipeline:
 
-### Problematic slice: station 110, repair mode
-
-![Pressure trend for station 110 repair mode](reports/pressure_station_110_repair.png)
-
-![Anomaly points for station 110](reports/anomaly_pressure_station_110.png)
-
-![Event markers for station 110](reports/event_markers_station_110.png)
-
-### Stable slice: station 102, normal mode
-
-![Stable pressure for station 102 normal mode](reports/stable_pressure_station_102_normal.png)
-
-![Stable flow for station 102 normal mode](reports/stable_flow_station_102_normal.png)
+```text
+raw operational data
+→ SQL monitoring mart
+→ event-aware analysis
+→ pandas reproduction
+→ validation
+→ visualization
+→ lightweight ML extension
+```
