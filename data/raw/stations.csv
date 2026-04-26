@@ -1,0 +1,13 @@
+station_id,station_name,region,station_type,launch_year
+101,CS North Alpha,north,mainline,2009
+102,CS North Beta,north,booster,2015
+103,CS North Gamma,north,distribution,2018
+104,CS South Delta,south,mainline,2010
+105,CS South Epsilon,south,booster,2013
+106,CS South Zeta,south,distribution,2020
+107,CS East Eta,east,mainline,2016
+108,CS East Theta,east,booster,2011
+109,CS East Iota,east,distribution,2019
+110,CS North Kappa,north,mainline,2008
+111,CS South Lambda,south,booster,2017
+112,CS East Mu,east,distribution,2014

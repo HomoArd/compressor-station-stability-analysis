@@ -1,0 +1,16 @@
+{
+  "stations_rows": 12,
+  "measurements_rows": 6564,
+  "events_rows": 106,
+  "date_min": "2024-01-01",
+  "date_max": "2025-06-30",
+  "unstable_station_ids": [
+    104,
+    110
+  ],
+  "stable_station_ids": [
+    102,
+    107,
+    111
+  ]
+}
