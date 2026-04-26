@@ -31,7 +31,7 @@ The analytical questions behind the project are:
 ## Dataset
 
 The project uses three raw CSV files:
-
+Project Structure
 | File | Description |
 |---|---|
 | `stations.csv` | Compressor station metadata |
